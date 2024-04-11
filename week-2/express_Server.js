@@ -11,12 +11,19 @@ function handleSum(counter){
   return sum;
 }
 function handleFirstRequest(req,res){
-  var value=req.query.counter;
+  var value=req.body;
   var sum=handleSum(value)
   var ans = "The sum is "+sum
   res.send(ans)
 }
+
+function handle2Sum(req,res){
+  res.send("LOl")
+}
 app.get('/',handleFirstRequest)
+
+
+app.post('/post',handle2Sum)
 
 
 app.get('/s-down',()=>{
