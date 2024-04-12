@@ -1,8 +1,6 @@
 const express=require("express")
 const app=express()
 
-
-
 function handleSum(counter){
   var sum=0;
   for(let i=0;i<counter;i++){
