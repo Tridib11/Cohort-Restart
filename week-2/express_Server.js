@@ -15,15 +15,12 @@ function handleSum(counter){
   }
   return sum;
 }
-function handleFirstRequest(req,res){
+
+function handleQueryRequest(req,res){
   var value=req.query.counter;
   var sum=handleSum(value)
   var ans = "The sum is "+sum
   res.send(ans)
-}
-
-function handle2Sum(req,res){
-  res.send("LOl")
 }
 
 function handleHeaderSum(req,res){
@@ -33,7 +30,7 @@ function handleHeaderSum(req,res){
   var ans = "the sum is "+sol
   res.send(ans)
 }
-app.get('/',handleFirstRequest)
+app.get('/query',handleQueryRequest)
 
 
 app.post('/header',handleHeaderSum)
