@@ -7,7 +7,7 @@ function middleware(req,res,next){
   next()
 }
 
-app.use(bodyParser.json())
+app.use(bodyParser.json()) // added Middleware for passing body
 
 // Implemented a Rate Limiter Middleware
 // The middleware checks the number of requests and if it exceeds 5, it sends a response "Rate limit exceeded"  and does not call the next function
