@@ -1,10 +1,13 @@
 const express=require("express")
 const app=express()
+var bodyParser = require('body-parser')
 
 function middleware(req,res,next){
   console.log("From inside middleware "+req.headers.counter)
   next()
 }
+
+app.use(bodyParser.json())
 
 // Implemented a Rate Limiter Middleware
 // The middleware checks the number of requests and if it exceeds 5, it sends a response "Rate limit exceeded"  and does not call the next function
@@ -20,7 +23,7 @@ function rateLimiterMiddleware(req,res,next){
   }
 }
 
-app.use(rateLimiterMiddleware)
+//app.use(rateLimiterMiddleware)
 
 function handleSum(counter){
   var sum=0;
@@ -44,10 +47,19 @@ function handleHeaderSum(req,res){
   var ans = "the sum is "+sol
   res.send(ans)
 }
+
+function handleBodySum(req,res){
+  console.log(req.body)
+  var counter=req.body.counter;
+  var sol=handleSum(counter)
+  var ans = "the sum is "+sol
+  res.send(ans)
+}
+
+
 app.get('/query',handleQueryRequest)
-
-
 app.post('/header',handleHeaderSum)
+app.post('/body',handleBodySum)
 
 
 app.get('/s-down',()=>{
