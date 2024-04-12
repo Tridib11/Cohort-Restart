@@ -18,10 +18,18 @@ function handleFirstRequest(req,res){
 function handle2Sum(req,res){
   res.send("LOl")
 }
+
+function handleHeaderSum(req,res){
+  console.log(req.headers)
+  var counter=req.headers.counter;
+  var sol=handleSum(counter)
+  var ans = "the sum is "+sol
+  res.send(ans)
+}
 app.get('/',handleFirstRequest)
 
 
-app.post('/post',handle2Sum)
+app.post('/header',handleHeaderSum)
 
 
 app.get('/s-down',()=>{
@@ -29,5 +37,5 @@ app.get('/s-down',()=>{
 })
 
 app.listen(8000,()=>{
-  console.log("Servar started")
+  console.log("Server started")
 })
