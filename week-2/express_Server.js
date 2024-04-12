@@ -40,7 +40,7 @@ function handleQueryRequest(req,res){
   res.send(ans)
 }
 
-function handleHeaderSum(req,res){
+function handleHeaderRequest(req,res){
   console.log(req.headers)
   var counter=req.headers.counter;
   var sol=handleSum(counter)
@@ -48,7 +48,7 @@ function handleHeaderSum(req,res){
   res.send(ans)
 }
 
-function handleBodySum(req,res){
+function handleBodyRequest(req,res){
   console.log(req.body)
   var counter=req.body.counter;
   var sol=handleSum(counter)
@@ -58,8 +58,8 @@ function handleBodySum(req,res){
 
 
 app.get('/query',handleQueryRequest)
-app.post('/header',handleHeaderSum)
-app.post('/body',handleBodySum)
+app.post('/header',handleHeaderRequest)
+app.post('/body',handleBodyRequest)
 
 
 app.get('/s-down',()=>{
