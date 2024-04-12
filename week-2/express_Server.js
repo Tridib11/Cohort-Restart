@@ -6,7 +6,21 @@ function middleware(req,res,next){
   next()
 }
 
-app.use(middleware)
+// Implemented a Rate Limiter Middleware
+// The middleware checks the number of requests and if it exceeds 5, it sends a response "Rate limit exceeded"  and does not call the next function
+
+let numberOfRequests=0;
+function rateLimiterMiddleware(req,res,next){
+  numberOfRequests++;
+  if(numberOfRequests>5){
+    res.send("Rate limit exceeded")
+  }else{
+    console.log("From inside middleware "+req.headers.counter)
+    next()
+  }
+}
+
+app.use(rateLimiterMiddleware)
 
 function handleSum(counter){
   var sum=0;
