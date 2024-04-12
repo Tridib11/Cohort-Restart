@@ -1,6 +1,16 @@
 const express=require("express")
 const app=express()
 
+
+
+
+function middleware(req,res,next){
+  console.log("From inside middleware "+req.headers.counter)
+  next()
+}
+
+app.use(middleware)
+
 function handleSum(counter){
   var sum=0;
   for(let i=0;i<counter;i++){
