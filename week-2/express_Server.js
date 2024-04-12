@@ -11,7 +11,7 @@ function handleSum(counter){
   return sum;
 }
 function handleFirstRequest(req,res){
-  var value=req.body;
+  var value=req.query.counter;
   var sum=handleSum(value)
   var ans = "The sum is "+sum
   res.send(ans)
