@@ -1,9 +1,6 @@
 const express=require("express")
 const app=express()
 
-
-
-
 function middleware(req,res,next){
   console.log("From inside middleware "+req.headers.counter)
   next()
