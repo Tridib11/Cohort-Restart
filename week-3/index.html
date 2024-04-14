@@ -7,8 +7,11 @@
 </head>
 <script>
     function onPress(){
+        function parsedResponse(data){
+            console.log(data)
+        }
         function callback(resp){
-            resp.json.then(parsedResponse)
+            resp.json().then(parsedResponse)
         }
         fetch("http://localhost:8000/todos",{
             method:"GET"
