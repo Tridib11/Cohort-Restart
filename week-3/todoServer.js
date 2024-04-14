@@ -66,7 +66,6 @@ app.delete('/todos/:id', (req, res) => {
   }
 });
 
-// for all other routes, return 404
 app.listen(8000,()=>{
   console.log("Started")
 })
