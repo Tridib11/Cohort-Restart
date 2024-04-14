@@ -66,6 +66,7 @@ app.delete('/todos/:id', (req, res) => {
   }
 });
 
+
 app.listen(8000,()=>{
-  console.log("Started")
+  console.log("Server started")
 })
