@@ -1,14 +1,14 @@
-const express=require('express');
-const bodyParser=require( 'body-parser')
+const express = require("express");
+const bodyParser = require("body-parser");
 
-const app=express();
+const app = express();
 app.use(bodyParser.json());
-let todos=[]
+let todos = [];
 
-function findIndex(arr,id){
-  for(let i=0;i<arr.length;i++){
-    if(arr[i].id===id){
-      return i
+function findIndex(arr, id) {
+  for (let i = 0; i < arr.length; i++) {
+    if (arr[i].id === id) {
+      return i;
     }
     return -1;
   }
@@ -22,31 +22,30 @@ function removeAtIndex(arr, index) {
   return newArray;
 }
 
-app.get('/todos',(req,res)=>{
+app.get("/todos", (req, res) => {
   res.json(todos);
-})
+});
 
-app.get('/todos/:id',(req,res)=>{
-  const todoIndex=findIndex(todos,parseInt(req.params.id))
-  if(todoIndex===-1){
+app.get("/todos/:id", (req, res) => {
+  const todoIndex = findIndex(todos, parseInt(req.params.id));
+  if (todoIndex === -1) {
     res.status(404).send();
-  }else{
-    res.json(todos[todoIndex])
+  } else {
+    res.json(todos[todoIndex]);
   }
-})
+});
 
-app.post("/todos",(req,res)=>{
-  const newTodo={
-    id:Math.floor(Math.random()*100000),
-    title:req.body.title,
-    description:req.body.description
-  }
-  todos.push(newTodo)
-  res.status(201).json(newTodo)
-})
+app.post("/todos", (req, res) => {
+  const newTodo = {
+    id: Math.floor(Math.random() * 100000),
+    title: req.body.title,
+    description: req.body.description,
+  };
+  todos.push(newTodo);
+  res.status(201).json(newTodo);
+});
 
-
-app.put('/todos/:id', (req, res) => {
+app.put("/todos/:id", (req, res) => {
   const todoIndex = findIndex(todos, parseInt(req.params.id));
   if (todoIndex === -1) {
     res.status(404).send();
@@ -57,7 +56,7 @@ app.put('/todos/:id', (req, res) => {
   }
 });
 
-app.delete('/todos/:id', (req, res) => {
+app.delete("/todos/:id", (req, res) => {
   const todoIndex = findIndex(todos, parseInt(req.params.id));
   if (todoIndex === -1) {
     res.status(404).send();
@@ -67,6 +66,6 @@ app.delete('/todos/:id', (req, res) => {
   }
 });
 
-app.listen(8000,()=>{
+app.listen(8000, () => {
   console.log("Server is running on port 8000");
-})
+});
