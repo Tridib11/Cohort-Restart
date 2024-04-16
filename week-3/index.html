@@ -9,14 +9,16 @@
 
         function todoCallback(data){
             console.log(data)
+            var parentElement=document.getElementById("mainArea");
+            parentElement.innerHTML=JSON.stringify(data);
         }
-        function callback(resp){
+        function callback2(resp){
             resp.json().then(todoCallback)
         }
         function getData(){
             fetch("http://localhost:8000/todos",{
                 method:"GET",
-            }).then(callback)
+            }).then(callback2)
 
         }
         getData()
@@ -52,5 +54,8 @@
     Todo description
     <input type="text" id="description"></input> <br>
     <button onclick="onPress()">Send todo</button>
+    <div id="mainArea">
+        
+    </div>
 </body>
 </html>
