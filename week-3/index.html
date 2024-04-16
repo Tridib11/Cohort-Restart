@@ -6,17 +6,33 @@
     <title>Todo App</title>
 </head>
 <script>
-    function onPress(){
-        var title=document.getElementById('title').value
-        var description=document.getElementById('description').value
 
-        console.log(title)
+        function todoCallback(data){
+            console.log(data)
+        }
+        function callback(resp){
+            resp.json().then(todoCallback)
+        }
+        function getData(){
+            fetch("http://localhost:8000/todos",{
+                method:"GET",
+            }).then(callback)
+
+        }
+        getData()
+
+
+
         function parsedResponse(data){
             console.log(data)
         }
         function callback(resp){
             resp.json().then(parsedResponse)
+            // parsedResponse(resp)
         }
+        function onPress(){
+        var title=document.getElementById('title').value
+        var description=document.getElementById('description').value
         fetch("http://localhost:8000/todos",{
             method:"POST",
             body:JSON.stringify({
