@@ -24,6 +24,8 @@ const adminAuthentication = (req, res, next) => {
   }
 };
 
+//User Middleware
+
 //Admin Routes
 
 app.post("/admin/Signup", (req, res) => {
@@ -62,5 +64,11 @@ app.put("/admin/courses/:courseId", adminAuthentication, (req, res) => {
 app.get("/admin/courses", adminAuthentication, (req, res) => {
   res.json({ course: COURSES });
 });
+
+//User Routes
+
+app.listen(8000,()=>{
+  console.log("Server started");
+})
 
 
