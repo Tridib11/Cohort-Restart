@@ -12,8 +12,21 @@
             // parentElement.innerHTML=JSON.stringify(data);
             for(var i=0;i<data.length;i++){                
                 var childElement= document.createElement("div");
-                childElement.innerHTML =data[i].title ;
-                parentElement.appendChild(childElement) ;
+                
+                var titleElement=document.createElement("span")
+                titleElement.innerHTML=data[i].title;
+
+                var descriptionElement=document.createElement("span")
+                descriptionElement.innerHTML=data[i].description;
+
+                var buttonElement=document.createElement("button")
+                buttonElement.innerHTML="Delete";
+                
+                childElement.appendChild(titleElement)
+                childElement.appendChild(descriptionElement)
+                childElement.appendChild(buttonElement)
+
+                parentElement.appendChild(childElement)
             }
         }
         function callback2(resp){
