@@ -9,6 +9,7 @@ let COURSES = [];
 
 //Authentication middlewares
 
+//Admin Middleware
 const adminAuthentication = (req, res, next) => {
   const { username, password } = req.headers;
   const admin = ADMINS.find(
@@ -47,5 +48,17 @@ app.post("/admin/courses", adminAuthentication, (req, res) => {
 
 app.put("/admin/courses/:courseId", adminAuthentication, (req, res) => {
   const courseId = req.params.courseId;
-  
+  const findCourse = COURSES.find((c) => c.id === courseId);
+  if (findCourse) {
+    Object.assign(findCourse, req.body);
+    res.status(203).json({ message: `Course modified successfull` });
+  } else {
+    res.status(403).json({ message: `Course not found` });
+  }
 });
+
+app.get("/admin/courses", adminAuthentication, (req, res) => {
+  res.json({ course: COURSES });
+});
+
+
