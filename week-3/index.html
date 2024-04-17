@@ -6,6 +6,18 @@
     <title>Todo App</title>
 </head>
 <script>
+    function deleteDone(){
+        console.log("Delete done")
+    }
+    function deleteTodo(id){
+        console.log(id)
+        fetch("http://localhost:8000/todos/"+id,{
+            method:"DELETE",           
+            headers:{
+                "Content-Type":"application/json"
+            }
+        }).then(deleteDone)
+    }
 
         function todoCallback(data){
             var parentElement=document.getElementById("mainArea");
@@ -21,6 +33,7 @@
 
                 var buttonElement=document.createElement("button")
                 buttonElement.innerHTML="Delete";
+                buttonElement.setAttribute("onClick","deleteTodo("+data[i].id+")")
                 
                 childElement.appendChild(titleElement)
                 childElement.appendChild(descriptionElement)
@@ -54,6 +67,7 @@
 
                 var buttonElement=document.createElement("button")
                 buttonElement.innerHTML="Delete";
+              
                 
                 childElement.appendChild(titleElement)
                 childElement.appendChild(descriptionElement)
