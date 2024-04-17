@@ -8,9 +8,13 @@
 <script>
 
         function todoCallback(data){
-            console.log(data)
             var parentElement=document.getElementById("mainArea");
-            parentElement.innerHTML=JSON.stringify(data);
+            // parentElement.innerHTML=JSON.stringify(data);
+            for(var i=0;i<data.length;i++){                
+                var childElement= document.createElement("div");
+                childElement.innerHTML =data[i].title ;
+                parentElement.appendChild(childElement) ;
+            }
         }
         function callback2(resp){
             resp.json().then(todoCallback)
