@@ -1,8 +1,10 @@
 const express = require("express");
+const bodyParser = require('body-parser');
 const app = express();
 
-app.use(express.json());
-app.use(bod);
+app.use(bodyParser.json());
+
+
 let ADMINS = [];
 let USERS = [];
 let COURSES = [];
