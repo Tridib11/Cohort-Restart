@@ -29,6 +29,7 @@
                 parentElement.appendChild(childElement)
             }
         }
+
         function callback2(resp){
             resp.json().then(todoCallback)
         }
@@ -43,11 +44,26 @@
 
 
         function parsedResponse(data){
-            console.log(data)
+                var parentElement=document.getElementById("mainArea");
+                var childElement= document.createElement("div");
+                
+                var titleElement=document.createElement("span")
+                titleElement.innerHTML=data.title;
+
+                var descriptionElement=document.createElement("span")
+                descriptionElement.innerHTML=data.description;
+
+                var buttonElement=document.createElement("button")
+                buttonElement.innerHTML="Delete";
+                
+                childElement.appendChild(titleElement)
+                childElement.appendChild(descriptionElement)
+                childElement.appendChild(buttonElement)
+
+                parentElement.appendChild(childElement)
         }
         function callback(resp){
             resp.json().then(parsedResponse)
-            // parsedResponse(resp)
         }
         function onPress(){
         var title=document.getElementById('title').value
