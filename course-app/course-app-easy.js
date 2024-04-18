@@ -27,7 +27,12 @@ const adminAuthentication = (req, res, next) => {
 //User Middleware
 const userAuthentication=(req,res,next)=>{
   const {username,password}=req.headers
-  const user=USERS.find
+  const user=USERS.find(u=>u.username===username && u.password===password)
+  if(user){
+    next()
+  }else{
+    res.status(403).json({message:"User authtication failed"})
+  }
 }
 //Admin Routes
 
