@@ -100,7 +100,7 @@ app.post('/users/courses/:courseId'.userAuthentication,(req,res)=>{
   const courseId=Number(req.params.courseId)
   const course=COURSES.find(c=> c.id ===courseId && c.published)
   if(course){
-    req.purchasedCourses.push(courseId)
+    req.user.purchasedCourses.push(courseId)
     res.json({message:'Course purchased successfully'})
   }
   else{
@@ -109,7 +109,13 @@ app.post('/users/courses/:courseId'.userAuthentication,(req,res)=>{
 })
 
 app.get('/users/purchasedCourses',userAuthentication,(req,res)=>{
-  const purchasedCourses
+  var purchasedCourseIds=req.user.purchasedCourses;
+  var purchasedCourses=[]
+  for(let i=0;i<COURSES.length;i++){
+    if(purchasedCourseIds.indexOf(COURSES[i].id)!==-1){
+      
+    }
+  } 
 })
 
 app.listen(8000, () => {
