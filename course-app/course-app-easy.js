@@ -67,6 +67,15 @@ app.get("/admin/courses", adminAuthentication, (req, res) => {
 
 //User Routes
 
+app.post("/users/signup",(req,res)=>{
+  const user={
+    username:req.body.username,
+    password:req.body.password,
+    purchasedCourses:[]
+  }
+  
+})
+
 app.listen(8000,()=>{
   console.log("Server started");
 })
