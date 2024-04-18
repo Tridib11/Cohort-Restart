@@ -91,7 +91,10 @@ app.post("/users/login", userAuthentication, (req, res) => {
   res.json({ message: "User created Successfully" });
 });
 
-app.get("/users/courses", userAuthentication, (req, res) => {});
+app.get("/users/courses", userAuthentication, (req, res) => {
+  COURSES.filter(c => c.published)
+  res.json({Courses : COURSES})
+});
 
 app.listen(8000, () => {
   console.log("Server started");
