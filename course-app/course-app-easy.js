@@ -98,7 +98,18 @@ app.get("/users/courses", userAuthentication, (req, res) => {
 
 app.post('/users/courses/:courseId'.userAuthentication,(req,res)=>{
   const courseId=Number(req.params.courseId)
-  const course=COURSES.find(c=> c.id ===)
+  const course=COURSES.find(c=> c.id ===courseId && c.published)
+  if(course){
+    req.purchasedCourses.push(courseId)
+    res.json({message:'Course purchased successfully'})
+  }
+  else{
+    res.status(404).json({message:'Course not found or not available'})
+  }
+})
+
+app.get('/users/purchasedCourses',userAuthentication,(req,res)=>{
+  const purchasedCourses
 })
 
 app.listen(8000, () => {
