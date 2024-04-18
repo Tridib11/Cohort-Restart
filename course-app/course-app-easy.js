@@ -30,6 +30,7 @@ const userAuthentication = (req, res, next) => {
     (u) => u.username === username && u.password === password
   );
   if (user) {
+    req.user = user;
     next();
   } else {
     res.status(403).json({ message: "User authtication failed" });
@@ -92,9 +93,13 @@ app.post("/users/login", userAuthentication, (req, res) => {
 });
 
 app.get("/users/courses", userAuthentication, (req, res) => {
-  COURSES.filter(c => c.published)
-  res.json({Courses : COURSES})
+  res.json({ Courses: COURSES.filter((c) => c.published) });
 });
+
+app.post('/users/courses/:courseId'.userAuthentication,(req,res)=>{
+  const courseId=Number(req.params.courseId)
+  const course=COURSES.find(c=> c.id ===)
+})
 
 app.listen(8000, () => {
   console.log("Server started");
