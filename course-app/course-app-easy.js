@@ -113,9 +113,10 @@ app.get('/users/purchasedCourses',userAuthentication,(req,res)=>{
   var purchasedCourses=[]
   for(let i=0;i<COURSES.length;i++){
     if(purchasedCourseIds.indexOf(COURSES[i].id)!==-1){
-      
+      purchasedCourses.push(COURSES[i])
     }
   } 
+  res.json({purchasedCourses})
 })
 
 app.listen(8000, () => {
