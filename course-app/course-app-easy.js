@@ -1,9 +1,8 @@
 const express = require("express");
-const bodyParser = require('body-parser');
+const bodyParser = require("body-parser");
 const app = express();
 
 app.use(bodyParser.json());
-
 
 let ADMINS = [];
 let USERS = [];
@@ -25,15 +24,17 @@ const adminAuthentication = (req, res, next) => {
 };
 
 //User Middleware
-const userAuthentication=(req,res,next)=>{
-  const {username,password}=req.headers
-  const user=USERS.find(u=>u.username===username && u.password===password)
-  if(user){
-    next()
-  }else{
-    res.status(403).json({message:"User authtication failed"})
+const userAuthentication = (req, res, next) => {
+  const { username, password } = req.headers;
+  const user = USERS.find(
+    (u) => u.username === username && u.password === password
+  );
+  if (user) {
+    next();
+  } else {
+    res.status(403).json({ message: "User authtication failed" });
   }
-}
+};
 //Admin Routes
 
 app.post("/admin/Signup", (req, res) => {
@@ -75,26 +76,23 @@ app.get("/admin/courses", adminAuthentication, (req, res) => {
 
 //User Routes
 
-app.post("/users/signup",(req,res)=>{
-  const user={
+app.post("/users/signup", (req, res) => {
+  const user = { ...req.body, purchasedCourses: [] };
+  /*const user={
     username:req.body.username,
     password:req.body.password,
     purchasedCourses:[]
-  }
-  USERS.push(user)
-  res.json({message:'User created successfully'})
-})
+  }*/
+  USERS.push(user);
+  res.json({ message: "User created successfully" });
+});
 
-app.post("/users/login",userAuthentication,(req,res)=>{
-  res.json({message : 'User created Successfully'})
-})
+app.post("/users/login", userAuthentication, (req, res) => {
+  res.json({ message: "User created Successfully" });
+});
 
-app.get('/users/courses',)
+app.get("/users/courses", userAuthentication, (req, res) => {});
 
-
-
-app.listen(8000,()=>{
+app.listen(8000, () => {
   console.log("Server started");
-})
-
-
+});
