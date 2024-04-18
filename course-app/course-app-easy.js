@@ -73,8 +73,15 @@ app.post("/users/signup",(req,res)=>{
     password:req.body.password,
     purchasedCourses:[]
   }
-  
+  USERS.push(user)
+  res.json({message:'User created successfully'})
 })
+
+app.post("/users/login",userAuthentication,(req,res)=>{
+  res.json({message : 'User created Successfully'})
+})
+
+
 
 app.listen(8000,()=>{
   console.log("Server started");
