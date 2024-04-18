@@ -25,7 +25,10 @@ const adminAuthentication = (req, res, next) => {
 };
 
 //User Middleware
-
+const userAuthentication=(req,res,next)=>{
+  const {username,password}=req.headers
+  const user=USERS.find
+}
 //Admin Routes
 
 app.post("/admin/Signup", (req, res) => {
@@ -80,6 +83,8 @@ app.post("/users/signup",(req,res)=>{
 app.post("/users/login",userAuthentication,(req,res)=>{
   res.json({message : 'User created Successfully'})
 })
+
+app.get('/users/courses',)
 
 
 
