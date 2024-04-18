@@ -96,7 +96,7 @@ app.get("/users/courses", userAuthentication, (req, res) => {
   res.json({ Courses: COURSES.filter((c) => c.published) });
 });
 
-app.post("/users/courses/:courseId".userAuthentication, (req, res) => {
+app.post("/users/courses/:courseId", userAuthentication, (req, res) => {
   const courseId = Number(req.params.courseId);
   const course = COURSES.find((c) => c.id === courseId && c.published);
   if (course) {
@@ -118,6 +118,6 @@ app.get("/users/purchasedCourses", userAuthentication, (req, res) => {
   res.json({ purchasedCourses });
 });
 
-app.listen(8000, () => {
+app.listen(3000, () => {
   console.log("Server started");
 });
