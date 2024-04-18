@@ -96,28 +96,27 @@ app.get("/users/courses", userAuthentication, (req, res) => {
   res.json({ Courses: COURSES.filter((c) => c.published) });
 });
 
-app.post('/users/courses/:courseId'.userAuthentication,(req,res)=>{
-  const courseId=Number(req.params.courseId)
-  const course=COURSES.find(c=> c.id ===courseId && c.published)
-  if(course){
-    req.user.purchasedCourses.push(courseId)
-    res.json({message:'Course purchased successfully'})
+app.post("/users/courses/:courseId".userAuthentication, (req, res) => {
+  const courseId = Number(req.params.courseId);
+  const course = COURSES.find((c) => c.id === courseId && c.published);
+  if (course) {
+    req.user.purchasedCourses.push(courseId);
+    res.json({ message: "Course purchased successfully" });
+  } else {
+    res.status(404).json({ message: "Course not found or not available" });
   }
-  else{
-    res.status(404).json({message:'Course not found or not available'})
-  }
-})
+});
 
-app.get('/users/purchasedCourses',userAuthentication,(req,res)=>{
-  var purchasedCourseIds=req.user.purchasedCourses;
-  var purchasedCourses=[]
-  for(let i=0;i<COURSES.length;i++){
-    if(purchasedCourseIds.indexOf(COURSES[i].id)!==-1){
-      purchasedCourses.push(COURSES[i])
+app.get("/users/purchasedCourses", userAuthentication, (req, res) => {
+  var purchasedCourseIds = req.user.purchasedCourses;
+  var purchasedCourses = [];
+  for (let i = 0; i < COURSES.length; i++) {
+    if (purchasedCourseIds.indexOf(COURSES[i].id) !== -1) {
+      purchasedCourses.push(COURSES[i]);
     }
-  } 
-  res.json({purchasedCourses})
-})
+  }
+  res.json({ purchasedCourses });
+});
 
 app.listen(8000, () => {
   console.log("Server started");
