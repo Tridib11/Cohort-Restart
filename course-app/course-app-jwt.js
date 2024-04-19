@@ -115,3 +115,16 @@ app.post("users/signup", (req, res) => {
     res.json({ message: "User created successfully ", token });
   }
 });
+
+app.post("/users/login",(req,res)=>{
+  const {username,password}=req.headers;
+  const user=USERS.find(u=>u.username===username && u.password===password)
+  if(user){
+    const token=generateUserJwt(user)
+    res.json({message : "User login successfull", token})
+  }else{
+    res.status(403).json({message:"User authentication failed"})
+  }
+})
+
+
