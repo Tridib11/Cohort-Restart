@@ -57,4 +57,9 @@ app.post("/admin/signin", (req, res) => {
   }
 });
 
-app.post("/admin/courses", authnticateAdminJwt, (req, res) => {});
+app.post("/admin/courses", authnticateAdminJwt, (req, res) => {
+  const course = req.body;
+  course.id = Date.now();
+  COURSES.push(course);
+  res.json({ message: `Course added Successfully ID: ${course.id}` });
+});
