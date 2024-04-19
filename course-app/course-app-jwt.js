@@ -45,13 +45,13 @@ const authnticateUserJwt = (req, res, next) => {
     const token = authHeader.split(" ")[1];
     jwt.verify(token, userSecret, (err, user) => {
       if (err) {
-        req.status(404).json({ message: "User authentication failed" });
+        return res.sendStatus(401); // Change to 401 or 403
       }
       req.user = user;
       next();
     });
   } else {
-    res.sendStatus(404);
+    res.sendStatus(401);
   }
 };
 
@@ -102,13 +102,13 @@ app.get("/admin/courses", authnticateAdminJwt, (req, res) => {
   res.json({ courses: COURSES });
 });
 
-app.post("users/signup", (req, res) => {
-  const user = req.body;
+app.post("/users/signup", (req, res) => {
+  const user = { ...req.body, purchasedCourses: [] };
   const existingUser = USERS.find((u) => u.username === user.username);
   if (existingUser) {
     res.json({ message: "User already exists" });
   } else {
-    USERS.add(user);
+    USERS.push(user);
     const token = generateUserJwt(user);
     res.json({ message: "User created successfully ", token });
   }
@@ -128,5 +128,15 @@ app.post("/users/login", (req, res) => {
 });
 
 app.get("/users/courses", authnticateUserJwt, (req, res) => {
-  res.json({ courses: COURSES });
+  let filteredCourses = [];
+  for (let i = 0; i<COURSES.length; i++) {
+    if (COURSES[i].published) {
+      filteredCourses.push(COURSES[i]);
+    }
+  }
+  res.json({ courses: filteredCourses });
 });
+
+app.listen(3000,()=>{
+  console.log("Server started")
+})
