@@ -12,6 +12,8 @@ let COURSES = [];
 const userSecret = "userSUP3RS3CR3T";
 const adminSecret = "adminSUP3RS3CR3T";
 
+
+//Admin Auth
 const generateAdminJwt = (admin) => {
   const payload = { username: admin.username };
   return jwt.sign(payload, adminSecret, { expiresIn: "1h" });
@@ -32,6 +34,8 @@ const authnticateAdminJwt = (req, res, next) => {
   }
 };
 
+
+//User auth
 const generateUserJwt = (user) => {
   const payload = { username: user.username };
   return jwt.sign(payload, userSecret, { expiresIn: "1h" });
