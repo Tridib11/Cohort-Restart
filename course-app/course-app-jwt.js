@@ -103,7 +103,7 @@ app.get("/admin/courses", authnticateAdminJwt, (req, res) => {
 });
 
 app.post("/users/signup", (req, res) => {
-  const user = { ...req.body, purchasedCourses: [] };
+  const user = { ...req.body};
   const existingUser = USERS.find((u) => u.username === user.username);
   if (existingUser) {
     res.json({ message: "User already exists" });
@@ -136,6 +136,36 @@ app.get("/users/courses", authnticateUserJwt, (req, res) => {
   }
   res.json({ courses: filteredCourses });
 });
+
+app.post('/users/courses/:courseId', authnticateUserJwt, (req, res) => {
+  const courseId = parseInt(req.params.courseId);
+  const course = COURSES.find(c => c.id === courseId);
+  if (course) {
+    const user = USERS.find(u => u.username === req.user.username);
+    if (user) {
+      if (!user.purchasedCourses) {
+        user.purchasedCourses = [];
+      }
+      user.purchasedCourses.push(course);
+      res.json({ message: 'Course purchased successfully' });
+    } else {
+      res.status(403).json({ message: 'User not found' });
+    }
+  } else {
+    res.status(404).json({ message: 'Course not found' });
+  }
+});
+
+app.get('/users/purchasedCourses', authnticateUserJwt, (req, res) => {
+  const user = USERS.find(u => u.username === req.user.username);
+  if (user && user.purchasedCourses) {
+    res.json({ purchasedCourses: user.purchasedCourses });
+  } else {
+    res.status(404).json({ message: 'No courses purchased' });
+  }
+});
+
+
 
 app.listen(3000,()=>{
   console.log("Server started")
