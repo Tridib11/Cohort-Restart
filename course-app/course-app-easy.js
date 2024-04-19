@@ -93,7 +93,14 @@ app.post("/users/login", userAuthentication, (req, res) => {
 });
 
 app.get("/users/courses", userAuthentication, (req, res) => {
-  res.json({ Courses: COURSES.filter((c) => c.published) });
+  // res.json({ Courses: COURSES.filter((c) => c.published) });
+  let filteredCourses = [];
+  for (let i = 0; i<COURSES.length; i++) {
+    if (COURSES[i].published) {
+      filteredCourses.push(COURSES[i]);
+    }
+  }
+  res.json({ courses: filteredCourses });
 });
 
 app.post("/users/courses/:courseId", userAuthentication, (req, res) => {
