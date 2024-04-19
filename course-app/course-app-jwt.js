@@ -63,3 +63,7 @@ app.post("/admin/courses", authnticateAdminJwt, (req, res) => {
   COURSES.push(course);
   res.json({ message: `Course added Successfully ID: ${course.id}` });
 });
+
+app.put("/admin/courses/:courseId",authnticateAdminJwt,(req,res)=>{
+  
+})
