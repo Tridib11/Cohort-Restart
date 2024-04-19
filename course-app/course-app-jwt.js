@@ -37,6 +37,22 @@ const generateUserJwt = (user) => {
   return jwt.sign(payload, userSecret, { expiresIn: "1h" });
 };
 
+const authnticateUserJwt = (req, res, next) => {
+  const authHeader = req.headers.authorization;
+  if (authHeader) {
+    const token = authHeader.split(" ")[1];
+    jwt.verify(token, userSecret, (err, user) => {
+      if (err) {
+        req.status(404).json({ message: "User authentication failed" });
+      }
+      req.user = user;
+      next();
+    });
+  } else {
+    res.sendStatus(404);
+  }
+};
+
 app.post("/admin/signup", (req, res) => {
   const admin = req.body;
   const existingAdmin = ADMINS.find((a) => a.username === admin.username);
