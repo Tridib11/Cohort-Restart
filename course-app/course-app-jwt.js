@@ -12,7 +12,6 @@ let COURSES = [];
 const userSecret = "userSUP3RS3CR3T";
 const adminSecret = "adminSUP3RS3CR3T";
 
-
 //Admin Auth
 const generateAdminJwt = (admin) => {
   const payload = { username: admin.username };
@@ -33,7 +32,6 @@ const authnticateAdminJwt = (req, res, next) => {
     res.sendStatus(401);
   }
 };
-
 
 //User auth
 const generateUserJwt = (user) => {
@@ -116,15 +114,19 @@ app.post("users/signup", (req, res) => {
   }
 });
 
-app.post("/users/login",(req,res)=>{
-  const {username,password}=req.headers;
-  const user=USERS.find(u=>u.username===username && u.password===password)
-  if(user){
-    const token=generateUserJwt(user)
-    res.json({message : "User login successfull", token})
-  }else{
-    res.status(403).json({message:"User authentication failed"})
+app.post("/users/login", (req, res) => {
+  const { username, password } = req.headers;
+  const user = USERS.find(
+    (u) => u.username === username && u.password === password
+  );
+  if (user) {
+    const token = generateUserJwt(user);
+    res.json({ message: "User login successfull", token });
+  } else {
+    res.status(403).json({ message: "User authentication failed" });
   }
-})
+});
 
-
+app.get("/users/courses", authnticateUserJwt, (req, res) => {
+  res.json({ courses: COURSES });
+});
