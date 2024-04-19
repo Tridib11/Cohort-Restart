@@ -89,6 +89,7 @@ app.post("/users/signup", (req, res) => {
 });
 
 app.post("/users/login", userAuthentication, (req, res) => {
+  console.log(req.user)
   res.json({ message: "User created Successfully" });
 });
 
