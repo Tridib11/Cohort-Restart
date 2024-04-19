@@ -32,6 +32,11 @@ const authnticateAdminJwt = (req, res, next) => {
   }
 };
 
+const generateUserJwt = (user) => {
+  const payload = { username: user.username };
+  return jwt.sign(payload, userSecret, { expiresIn: "1h" });
+};
+
 app.post("/admin/signup", (req, res) => {
   const admin = req.body;
   const existingAdmin = ADMINS.find((a) => a.username === admin.username);
@@ -77,4 +82,16 @@ app.put("/admin/courses/:courseId", authnticateAdminJwt, (req, res) => {
 
 app.get("/admin/courses", authnticateAdminJwt, (req, res) => {
   res.json({ courses: COURSES });
+});
+
+app.post("users/signup", (req, res) => {
+  const user = req.body;
+  const existingUser = USERS.find((u) => u.username === user.username);
+  if (existingUser) {
+    res.json({ message: "User already exists" });
+  } else {
+    USERS.add(user);
+    const token = generateUserJwt(user);
+    res.json({ message: "User created successfully ", token });
+  }
 });
