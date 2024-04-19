@@ -74,3 +74,7 @@ app.put("/admin/courses/:courseId", authnticateAdminJwt, (req, res) => {
     res.status(403).json({ message: `Course not found` });
   }
 });
+
+app.get("/admin/courses", authnticateAdminJwt, (req, res) => {
+  res.json({ courses: COURSES });
+});
