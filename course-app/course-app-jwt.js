@@ -64,6 +64,13 @@ app.post("/admin/courses", authnticateAdminJwt, (req, res) => {
   res.json({ message: `Course added Successfully ID: ${course.id}` });
 });
 
-app.put("/admin/courses/:courseId",authnticateAdminJwt,(req,res)=>{
-  
-})
+app.put("/admin/courses/:courseId", authnticateAdminJwt, (req, res) => {
+  const courseId = req.params.courseId;
+  const findCourse = COURSES.find((c) => c.id === courseId);
+  if (findCourse) {
+    Object.assign(findCourse, req.body);
+    res.status(203).json({ message: `Course modified successfull` });
+  } else {
+    res.status(403).json({ message: `Course not found` });
+  }
+});
