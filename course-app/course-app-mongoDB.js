@@ -70,3 +70,10 @@ const authenticateUserJwt = (req, res, next) => {
     res.sendStatus(401);
   }
 };
+
+//Connecting to MongoDB
+mongoose.connect("mongodb+srv://admin:admin@cluster0.ecv5ewk.mongodb.net/")
+
+app.post('/admin/signup', (req, res) => {
+  
+})
