@@ -26,6 +26,8 @@ const courseSchema=new mongoose.Schema({
   published:Boolean
 })
 
+//Defining mongoose models
+
 const User=mongoose.model('User',userSchema)
 const Admin=mongoose.model('Admin',adminSchema)
 const Course=mongoose.model('Course',courseSchema)
