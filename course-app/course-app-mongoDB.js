@@ -32,3 +32,16 @@ const User=mongoose.model('User',userSchema)
 const Admin=mongoose.model('Admin',adminSchema)
 const Course=mongoose.model('Course',courseSchema)
 
+
+//Secrets
+
+const userSecret="userSUP3RS3CR3T"
+const adminSecret="adminSUP3RS3CR3T"
+
+const authenticateAdminJwt=(req,res,next)=>{
+  const authHeader=req.headers.authorization
+  if(authHeader){
+    const token=authHeader.split(' ')[1]
+    
+  }
+}
