@@ -2,8 +2,10 @@ const express = require("express");
 const jwt = require("jsonwebtoken");
 const mongoose = require("mongoose");
 const app = express();
-
+const bodyParser = require("body-parser");
 aap.use(express.json());
+
+app.use(bodyParser.json());
 
 //Defining mongoose Schema
 
@@ -41,7 +43,23 @@ const authenticateAdminJwt = (req, res, next) => {
   const authHeader = req.headers.authorization;
   if (authHeader) {
     const token = authHeader.split(" ")[1];
-    jwt.verify(token, adminSecret, (err, user) => {
+    jwt.verify(token, adminSecret, (err, admin) => {
+      if (err) {
+        return res.sendStatus(403);
+      }
+      req.admin = admin;
+      next();
+    });
+  } else {
+    res.sendStatus(401);
+  }
+};
+
+const authenticateUserJwt = (req, res, next) => {
+  const authHeader = req.headers.authorization;
+  if (authHeader) {
+    const token = authHeader.split(" ")[1];
+    jwt.verify(token, userSecret, (err, user) => {
       if (err) {
         return res.sendStatus(403);
       }
