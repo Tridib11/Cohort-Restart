@@ -55,6 +55,8 @@ const authnticateUserJwt = (req, res, next) => {
   }
 };
 
+//Admin Routes
+
 app.post("/admin/signup", (req, res) => {
   const admin = req.body;
   const existingAdmin = ADMINS.find((a) => a.username === admin.username);
@@ -101,6 +103,8 @@ app.put("/admin/courses/:courseId", authnticateAdminJwt, (req, res) => {
 app.get("/admin/courses", authnticateAdminJwt, (req, res) => {
   res.json({ courses: COURSES });
 });
+
+//User Routes
 
 app.post("/users/signup", (req, res) => {
   const user = { ...req.body };
