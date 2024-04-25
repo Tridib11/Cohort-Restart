@@ -47,6 +47,10 @@ const authenticateAdminJwt = (req, res, next) => {
       if (err) {
         return res.sendStatus(403);
       }
+      // Check if the user has the 'admin' role
+      if (admin.role !== 'admin') {
+        return res.sendStatus(401);
+      }
       req.admin = admin;
       next();
     });
@@ -74,7 +78,16 @@ const authenticateUserJwt = (req, res, next) => {
 //Connecting to MongoDB
 mongoose.connect("mongodb+srv://admin:admin@cluster0.ecv5ewk.mongodb.net/course-app")
 
-app.post('/admin/signup', (req, res) => {
+app.post('/admin/signup', async(req, res) => {
   const {username,password}=req.body
-  
+  const admin=await Admin.findOne({username})
+  if(admin){
+    res.status(203).json({message : 'Admin already exists'})
+  }
+  else{
+    const newAdmin=new Admin({username,password})
+    await newAdmin.save()
+    const token=jwt.sign({username , role:'admin'},adminSecret,{expiresIn:'1h'})
+    res.json({message:"Admin created successfully",token})
+  }
 })
