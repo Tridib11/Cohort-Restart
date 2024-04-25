@@ -124,3 +124,8 @@ app.put("/admin/courses/:courseId", authenticateAdminJwt, async (req, res) => {
     res.status(404).json({ message: "Course not found" });
   }
 });
+
+app.get("/admin/courses", authenticateAdminJwt, async (req, res) => {
+  const courses = await Course.find({});
+  res.json({ courses });
+});
