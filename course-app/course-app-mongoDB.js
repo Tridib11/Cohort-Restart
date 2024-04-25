@@ -110,7 +110,7 @@ app.post("/admin/login", async (req, res) => {
 
 app.post("/admin/courses", authenticateAdminJwt, async (req, res) => {
   const course = new Course(req.body);
-  await Course.save();
+  await course.save();
   res.json({ message: "Course created Successfully", courseId: course.id });
 });
 
@@ -140,7 +140,7 @@ app.post('/users/signup', async (req, res) => {
   } else {
     const newUser = new User({ username, password });
     await newUser.save();
-    const token = jwt.sign({ username, role: 'user' }, SECRET, { expiresIn: '1h' });
+    const token = jwt.sign({ username, role: 'user' }, userSecret, { expiresIn: '1h' });
     res.json({ message: 'User created successfully', token });
   }
 });
@@ -149,7 +149,7 @@ app.post('/users/login', async (req, res) => {
   const { username, password } = req.headers;
   const user = await User.findOne({ username, password });
   if (user) {
-    const token = jwt.sign({ username, role: 'user' }, SECRET, { expiresIn: '1h' });
+    const token = jwt.sign({ username, role: 'user' }, userSecret, { expiresIn: '1h' });
     res.json({ message: 'Logged in successfully', token });
   } else {
     res.status(403).json({ message: 'Invalid username or password' });
