@@ -3,7 +3,7 @@ const jwt = require("jsonwebtoken");
 const mongoose = require("mongoose");
 const app = express();
 const bodyParser = require("body-parser");
-aap.use(express.json());
+app.use(express.json());
 
 app.use(bodyParser.json());
 
@@ -77,7 +77,7 @@ const authenticateUserJwt = (req, res, next) => {
 
 //Connecting to MongoDB
 mongoose.connect(
-  "mongodb+srv://admin:admin@cluster0.ecv5ewk.mongodb.net/course-app"
+  "mongodb+srv://admin:admin@cluster0.ecv5ewk.mongodb.net/course-app-new"
 );
 
 app.post("/admin/signup", async (req, res) => {
@@ -102,7 +102,7 @@ app.post("/admin/login", async (req, res) => {
     const token = jwt.sign({ username, role: "admin" }, adminSecret, {
       expiresIn: "1h",
     });
-    res.json({ message: "Logged in successfully" });
+    res.json({ message: "Logged in successfully",token });
   } else {
     res.status(403).json({ message: "Invalid username or password" });
   }
@@ -186,3 +186,6 @@ app.get('/users/purchasedCourses', authenticateUserJwt, async (req, res) => {
     res.status(403).json({ message: 'User not found' });
   }
 });
+app.listen(3000,()=>{
+  console.log("Server running on port 3000")
+})
