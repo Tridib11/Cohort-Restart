@@ -48,7 +48,7 @@ const authenticateAdminJwt = (req, res, next) => {
         return res.sendStatus(403);
       }
       // Check if the user has the 'admin' role
-      if (admin.role !== 'admin') {
+      if (admin.role !== "admin") {
         return res.sendStatus(401);
       }
       req.admin = admin;
@@ -76,18 +76,40 @@ const authenticateUserJwt = (req, res, next) => {
 };
 
 //Connecting to MongoDB
-mongoose.connect("mongodb+srv://admin:admin@cluster0.ecv5ewk.mongodb.net/course-app")
+mongoose.connect(
+  "mongodb+srv://admin:admin@cluster0.ecv5ewk.mongodb.net/course-app"
+);
 
-app.post('/admin/signup', async(req, res) => {
-  const {username,password}=req.body
-  const admin=await Admin.findOne({username})
-  if(admin){
-    res.status(203).json({message : 'Admin already exists'})
+app.post("/admin/signup", async (req, res) => {
+  const { username, password } = req.body;
+  const admin = await Admin.findOne({ username });
+  if (admin) {
+    res.status(203).json({ message: "Admin already exists" });
+  } else {
+    const newAdmin = new Admin({ username, password });
+    await newAdmin.save();
+    const token = jwt.sign({ username, role: "admin" }, adminSecret, {
+      expiresIn: "1h",
+    });
+    res.json({ message: "Admin created successfully", token });
   }
-  else{
-    const newAdmin=new Admin({username,password})
-    await newAdmin.save()
-    const token=jwt.sign({username , role:'admin'},adminSecret,{expiresIn:'1h'})
-    res.json({message:"Admin created successfully",token})
+});
+
+app.post("/admin/login", async (req, res) => {
+  const { username, password } = req.headers;
+  const admin = await Admin.findOne({ username, password });
+  if (admin) {
+    const token = jwt.sign({ username, role: "admin" }, adminSecret, {
+      expiresIn: "1h",
+    });
+    res.json({ message: "Logged in successfully" });
+  } else {
+    res.status(403).json({ message: "Invalid username or password" });
   }
-})
+});
+
+app.post("/admin/courses", authenticateAdminJwt, async (req, res) => {
+  const course = new Course(req.body);
+  await Course.save();
+  res.json({ message: "Course created Successfully", courseId: course.id });
+});
