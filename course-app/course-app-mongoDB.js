@@ -72,8 +72,9 @@ const authenticateUserJwt = (req, res, next) => {
 };
 
 //Connecting to MongoDB
-mongoose.connect("mongodb+srv://admin:admin@cluster0.ecv5ewk.mongodb.net/")
+mongoose.connect("mongodb+srv://admin:admin@cluster0.ecv5ewk.mongodb.net/course-app")
 
 app.post('/admin/signup', (req, res) => {
+  const {username,password}=req.body
   
 })
