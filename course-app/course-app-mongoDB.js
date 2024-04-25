@@ -155,3 +155,8 @@ app.post('/users/login', async (req, res) => {
     res.status(403).json({ message: 'Invalid username or password' });
   }
 });
+
+app.get('/users/courses', authenticateUserJwt, async (req, res) => {
+  const courses = await Course.find({published: true});
+  res.json({ courses });
+});
