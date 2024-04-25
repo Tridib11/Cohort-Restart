@@ -64,8 +64,8 @@ const authenticateUserJwt = (req, res, next) => {
   if (authHeader) {
     const token = authHeader.split(" ")[1];
     jwt.verify(token, userSecret, (err, user) => {
-      if (err) {
-        return res.sendStatus(403);
+      if (user.role !== "user") {
+        return res.sendStatus(401);
       }
       req.user = user;
       next();
@@ -128,4 +128,19 @@ app.put("/admin/courses/:courseId", authenticateAdminJwt, async (req, res) => {
 app.get("/admin/courses", authenticateAdminJwt, async (req, res) => {
   const courses = await Course.find({});
   res.json({ courses });
+});
+
+
+// User routes
+app.post('/users/signup', async (req, res) => {
+  const { username, password } = req.body;
+  const user = await User.findOne({ username });
+  if (user) {
+    res.status(403).json({ message: 'User already exists' });
+  } else {
+    const newUser = new User({ username, password });
+    await newUser.save();
+    const token = jwt.sign({ username, role: 'user' }, SECRET, { expiresIn: '1h' });
+    res.json({ message: 'User created successfully', token });
+  }
 });
