@@ -17,7 +17,7 @@ function App() {
   return (
     <div>
       {todo.map((val) => {
-        return <Todo title={val.title} description={val.description}/>
+        return <Todo title={val.title} description={val.description} />;
       })}
     </div>
   );
