@@ -1,5 +1,6 @@
 import { useState } from "react";
 import "./App.css";
+import { useEffect } from "react";
 
 function App() {
   const [todo, setTodo] = useState([
@@ -14,6 +15,10 @@ function App() {
       id: 2,
     },
   ]);
+
+  useEffect(() => {
+    console.log("Hey");
+  }, []);
   return (
     <div>
       {todo.map((val) => {
@@ -40,7 +45,6 @@ export default App;
 //     </div>
 //   );
 // }
-
 
 // setInterval(() => {
 //   setTodo({
