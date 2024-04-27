@@ -31,6 +31,7 @@ function Todo(props) {
     </>
   );
 }
+export default App;
 
 // function Lol({ name, desc }) {
 //   return (
@@ -40,7 +41,6 @@ function Todo(props) {
 //   );
 // }
 
-export default App;
 
 // setInterval(() => {
 //   setTodo({
