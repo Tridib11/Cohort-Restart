@@ -2,37 +2,40 @@ import { useState } from "react";
 import "./App.css";
 
 function App() {
-  const [todo, setTodo] = useState({
-    title: "Gym",
-    description: "GO out to the gym",
-    id: 1,
-  });
-
-  setInterval(() => {
-    setTodo({
-      title: "Maan",
-      description: "run",
-      id: 3,
-    });
-  }, 2000);
+  const [todo, setTodo] = useState(
+    {
+      title: "Gym",
+      description: "GO out to the gym",
+      id: 1,
+    },
+    {
+      title: "Class",
+      description: "Go to Class",
+      id: 2,
+    }
+  );
   return (
     <>
-      {todo.title} <br />
-      {todo.description} <br />
-      {todo.id} <br />
-      <Lol name={"Tridib"} desc={"desc"} />
+      {JSON.stringify(todo)}
     </>
   );
 }
 
-function Lol({ name, desc }) {
-  return (
-    <div>
-      {name}
-      <br />
-      {desc}
-    </div>
-  );
-}
+// function Lol({ name, desc }) {
+//   return (
+//     <div>
+//       {JSON.stringify(todos)} 
+//     </div>
+//   );
+// }
 
 export default App;
+
+
+  // setInterval(() => {
+  //   setTodo({
+  //     title: "Maan",
+  //     description: "run",
+  //     id: 3,
+  //   });
+  // }, 2000);
