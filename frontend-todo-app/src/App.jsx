@@ -17,14 +17,18 @@ function App() {
   return (
     <div>
       {todo.map((val) => {
-        return (
-          <div>
-            {val.title} <br />
-            {val.description} <br />
-          </div>
-        );
+        return <Todo title={val.title} description={val.description}/>
       })}
     </div>
+  );
+}
+
+function Todo(props) {
+  return (
+    <>
+      {props.title} <br />
+      {props.description} <br />
+    </>
   );
 }
 
