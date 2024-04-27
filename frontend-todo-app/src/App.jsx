@@ -2,8 +2,8 @@ import { useState } from "react";
 import "./App.css";
 
 function App() {
-  const [todo, setTodo] = useState(
-    [{
+  const [todo, setTodo] = useState([
+    {
       title: "Gym",
       description: "GO out to the gym",
       id: 1,
@@ -12,18 +12,19 @@ function App() {
       title: "Class",
       description: "Go to Class",
       id: 2,
-    }]
-  );
+    },
+  ]);
   return (
-    <>
+    <div>
       {todo.map((val) => {
         return (
           <div>
-            {todo.title}{todo.description}
+            {val.title} <br />
+            {val.description} <br />
           </div>
         );
       })}
-    </>
+    </div>
   );
 }
 
