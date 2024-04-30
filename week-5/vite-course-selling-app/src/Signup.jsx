@@ -1,40 +1,37 @@
-import React from "react";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
+import {Card, Typography} from "@mui/material";
 function Signup() {
   return (
     <div>
       <center>
         <div style={{ marginTop: "150px", marginBottom: "10px" }}>
-          Welcome to Coursera Signup above
+            <Typography variant={"h6"}>
+                Welcome to Coursera Signup above
+            </Typography>
+
         </div>
       </center>
       <center>
-        <div
-          style={{
-            border: "2px solid black",
-            width: "400px",
-            padding: "20px",
-          }}
-        >
-          <TextField
-            fullWidth
-            id="outlined-basic"
-            label="Email"
-            variant="outlined"
-          />
-          <br /> <br />
-          <TextField
-            fullWidth
-            id="outlined-basic"
-            label="Password"
-            variant="outlined"
-            type={"password"}
-          />
-          <br />
-          <br />
-          <Button size={"largdfadfafasfe"} variant="contained">Sign Up</Button>
-        </div>
+          <Card variant={"outlined"} style={{width:"400px", padding:"20px"}} >
+              <TextField
+                  fullWidth
+                  id="outlined-basic"
+                  label="Email"
+                  variant="outlined"
+              />
+              <br /> <br />
+              <TextField
+                  fullWidth
+                  id="outlined-basic"
+                  label="Password"
+                  variant="outlined"
+                  type={"password"}
+              />
+              <br />
+              <br />
+              <Button size={"large"} variant="contained">Sign Up</Button>
+          </Card>
       </center>
     </div>
   );
