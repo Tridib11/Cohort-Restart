@@ -14,15 +14,26 @@ function Signup() {
           style={{
             border: "2px solid black",
             width: "400px",
+            padding: "20px",
           }}
         >
-          Username -{" "}
-          <TextField id="outlined-basic" label="Outlined" variant="outlined" />
+          <TextField
+            fullWidth
+            id="outlined-basic"
+            label="Email"
+            variant="outlined"
+          />
+          <br /> <br />
+          <TextField
+            fullWidth
+            id="outlined-basic"
+            label="Password"
+            variant="outlined"
+            type={"password"}
+          />
           <br />
-          Password -{" "}
-          <TextField id="outlined-basic" label="Outlined" variant="outlined" />
           <br />
-          <Button variant="contained">Sign Up</Button>
+          <Button size={"large"} variant="contained">Sign Up</Button>
         </div>
       </center>
     </div>
