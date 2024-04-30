@@ -1,4 +1,3 @@
-import React from "react";
 import Signup from "./Signup";
 import Appbar from "./Appbar.jsx";
 function App() {
