@@ -4,10 +4,14 @@ function Signup() {
   return (
     <div>
       <center>
+        <div>Welcome to Coursera Signup above</div>
+      </center>
+      <center>
         <div
           style={{
             border: "2px solid black",
             width: "400px",
+            marginTop: "150px",
           }}
         >
           Username - <input type={"text"} />
