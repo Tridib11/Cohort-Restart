@@ -15,7 +15,7 @@ function Signup() {
       <div>
         <Typography
           variant={"h6"}
-          style={{ display: "flex", justifyContent: "center" }}
+          style={{ display: "flex", justifyContent: "center", margin: "10px" }}
         >
           Welcome to Coursera Signup above
         </Typography>
@@ -36,9 +36,11 @@ function Signup() {
           />
           <br />
           <br />
-          <Button size={"large"} variant="contained">
-            Sign Up
-          </Button>
+          <div style={{ display: "flex", justifyContent: "center" }}>
+            <Button size={"large"} variant="contained">
+              Sign Up
+            </Button>
+          </div>
         </Card>
       </div>
     </div>
