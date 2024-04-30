@@ -1,5 +1,6 @@
 import React from "react";
-
+import Button from "@mui/material/Button";
+import TextField from "@mui/material/TextField";
 function Signup() {
   return (
     <div>
@@ -15,11 +16,13 @@ function Signup() {
             width: "400px",
           }}
         >
-          Username - <input type={"text"} />
+          Username -{" "}
+          <TextField id="outlined-basic" label="Outlined" variant="outlined" />
           <br />
-          Password - <input type={"password"} />
+          Password -{" "}
+          <TextField id="outlined-basic" label="Outlined" variant="outlined" />
           <br />
-          <button>Signup</button>
+          <Button variant="contained">Sign Up</Button>
         </div>
       </center>
     </div>
