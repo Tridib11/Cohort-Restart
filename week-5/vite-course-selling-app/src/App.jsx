@@ -1,16 +1,20 @@
-import Signup from "./Signup";
-import Appbar from "./Appbar.jsx";
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Signin from "./Signin.jsx";
+import Signup from "./Signup.jsx";
 
+
+// This file shows how you can do routing in React.
+// Try going to /login, /register, /about, /courses on the website and see how the html changes
+// based on the route.
+// You can also try going to /random and see what happens (a route that doesnt exist)
 function App() {
     return (
-        <div
-            style={{width: "100vw", height: "100vh", backgroundColor: "#eeeeee"}}
-        >
-            <Appbar></Appbar>
-            <Signin></Signin>
-            {/*<Signup></Signup>*/}
-        </div>
+        <Router>
+            <Routes>
+                <Route path="/login" element={<Signin/>} />
+                <Route path="/register" element={<Signup/>} />
+            </Routes>
+        </Router>
     );
 }
 
