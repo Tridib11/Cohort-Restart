@@ -1,5 +1,6 @@
 import Signup from "./Signup";
 import Appbar from "./Appbar.jsx";
+import Signin from "./Signin.jsx";
 
 function App() {
     return (
@@ -7,7 +8,8 @@ function App() {
             style={{width: "100vw", height: "100vh", backgroundColor: "#eeeeee"}}
         >
             <Appbar></Appbar>
-            <Signup></Signup>
+            <Signin></Signin>
+            {/*<Signup></Signup>*/}
         </div>
     );
 }
