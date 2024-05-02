@@ -6,12 +6,12 @@ function Appbar() {
         display: "flex",
         justifyContent: "space-between"
     }}>
-        <div>
-            <Typography>Coursera</Typography>
+        <div style={{backgroundColor: "red"}}>
+            <Typography variant={"h5"}>Coursera</Typography>
         </div>
         <div>
-            <Button>Sign up</Button>
-            <Button>Sign in</Button>
+            <Button variant={"contained"}>Sign up</Button>
+            <Button variant={"contained"}>Sign in</Button>
         </div>
 
 
