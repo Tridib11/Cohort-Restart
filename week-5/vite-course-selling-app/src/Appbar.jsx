@@ -3,13 +3,13 @@ import Button from "@mui/material/Button";
 
 function Appbar() {
     return <div style={{
-        display: "flex", justifyContent: "space-between"
+        display: "flex", justifyContent: "space-between", padding: "4px"
     }}>
         <div>
             <Typography variant={"h5"}>Coursera</Typography>
         </div>
-        <div style={{display:"flex"}}>
-            <div>
+        <div style={{display: "flex"}}>
+            <div style={{marginRight: "10px"}}>
                 <Button variant={"contained"}>Sign up</Button>
             </div>
             <div>
