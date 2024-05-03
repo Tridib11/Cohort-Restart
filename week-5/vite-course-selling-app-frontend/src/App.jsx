@@ -2,6 +2,7 @@ import {BrowserRouter as Router, Routes, Route} from 'react-router-dom';
 import Signin from "./Signin.jsx";
 import Signup from "./Signup.jsx";
 import Appbar from "./Appbar.jsx";
+import AddCourse from "./AddCourse.jsx";
 
 function App() {
     return (
@@ -11,6 +12,7 @@ function App() {
                 <Routes>
                     <Route path="/signin" element={<Signin/>}/>
                     <Route path="/signup" element={<Signup/>}/>
+                    <Route path="/addcourses" element={<AddCourse/>}/>
                 </Routes>
             </Router>
         </div>
