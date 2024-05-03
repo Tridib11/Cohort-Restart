@@ -45,7 +45,10 @@ function Signup() {
                                 body: JSON.stringify({
                                     username,
                                     password
-                                })
+                                }),
+                                headers:{
+                                    "Content-type":"application/json"
+                                }
                             })
                         }}>
                             Sign Up
