@@ -22,14 +22,14 @@ function Signup() {
                 <Card variant={"outlined"} style={{width: "400px", padding: "20px"}}>
                     <TextField
                         fullWidth
-                        id="outlined-basic"
+                        id={"username"}
                         label="Email"
                         variant="outlined"
                     />
                     <br/> <br/>
                     <TextField
                         fullWidth
-                        id="outlined-basic"
+                        id={"password"}
                         label="Password"
                         variant="outlined"
                         type={"password"}
@@ -37,7 +37,17 @@ function Signup() {
                     <br/>
                     <br/>
                     <div style={{display: "flex", justifyContent: "center"}}>
-                        <Button size={"large"} variant="contained">
+                        <Button size={"large"} variant="contained" onClick={() => {
+                            let username = document.getElementById('username').value
+                            let password = document.getElementById('password').value
+                            fetch("http://localhost:3000/admin/signup", {
+                                method: "POST",
+                                body: JSON.stringify({
+                                    username,
+                                    password
+                                })
+                            })
+                        }}>
                             Sign Up
                         </Button>
                     </div>
