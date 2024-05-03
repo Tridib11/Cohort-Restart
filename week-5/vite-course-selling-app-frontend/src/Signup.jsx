@@ -4,8 +4,8 @@ import {Card, Typography} from "@mui/material";
 import {useState} from "react";
 
 function Signup() {
-    const[email,setEmail]=useState("")
-    const[password,setPassword]=useState("")
+    const [email, setEmail] = useState("")
+    const [password, setPassword] = useState("")
     return (
         <div
             style={{
@@ -24,7 +24,7 @@ function Signup() {
                 </Typography>
                 <Card variant={"outlined"} style={{width: "400px", padding: "20px"}}>
                     <TextField
-                        onChange={(e)=>{
+                        onChange={(e) => {
                             setEmail(e.target.value)
                         }}
                         fullWidth
@@ -33,7 +33,7 @@ function Signup() {
                     />
                     <br/> <br/>
                     <TextField
-                        onChange={(e)=>{
+                        onChange={(e) => {
                             setPassword(e.target.value)
                         }}
                         fullWidth
@@ -45,16 +45,24 @@ function Signup() {
                     <br/>
                     <div style={{display: "flex", justifyContent: "center"}}>
                         <Button size={"large"} variant="contained" onClick={() => {
+                            function callback2(data){
+                                localStorage.setItem("token",data.token)
+                                // console.log(data)
+                            }
+                            function callback1(res) {
+                                res.json().then(callback2)
+                            }
+
                             fetch("http://localhost:3000/admin/signup", {
                                 method: "POST",
                                 body: JSON.stringify({
-                                    username,
-                                    password
+                                    username: email,
+                                    password: password
                                 }),
                                 headers: {
                                     "Content-type": "application/json"
                                 }
-                            })
+                            }).then(callback1)
                         }}>
                             Sign Up
                         </Button>
