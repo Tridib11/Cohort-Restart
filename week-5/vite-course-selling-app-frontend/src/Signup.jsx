@@ -1,8 +1,11 @@
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
 import {Card, Typography} from "@mui/material";
+import {useState} from "react";
 
 function Signup() {
+    const[email,setEmail]=useState("")
+    const[password,setPassword]=useState("")
     return (
         <div
             style={{
@@ -21,15 +24,19 @@ function Signup() {
                 </Typography>
                 <Card variant={"outlined"} style={{width: "400px", padding: "20px"}}>
                     <TextField
+                        onChange={(e)=>{
+                            setEmail(e.target.value)
+                        }}
                         fullWidth
-                        id={"username"}
                         label="Email"
                         variant="outlined"
                     />
                     <br/> <br/>
                     <TextField
+                        onChange={(e)=>{
+                            setPassword(e.target.value)
+                        }}
                         fullWidth
-                        id={"password"}
                         label="Password"
                         variant="outlined"
                         type={"password"}
@@ -38,8 +45,6 @@ function Signup() {
                     <br/>
                     <div style={{display: "flex", justifyContent: "center"}}>
                         <Button size={"large"} variant="contained" onClick={() => {
-                            let username = document.getElementById('username').value
-                            let password = document.getElementById('password').value
                             fetch("http://localhost:3000/admin/signup", {
                                 method: "POST",
                                 body: JSON.stringify({
