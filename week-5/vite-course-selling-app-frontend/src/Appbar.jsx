@@ -13,23 +13,28 @@ function Appbar() {
       <div>
         <Typography variant={"h5"}>Coursera</Typography>
       </div>
-      <div style={{ display: "flex" }}>
-        <div style={{ marginRight: "10px" }}>
-          <Button
-            variant={"contained"}
-            onClick={() => {
-              window.location = "/signup";
-            }}
-          >
-            Sign up
-          </Button>
+        <div style={{display: "flex"}}>
+            <div style={{marginRight: "10px"}}>
+                <Button
+                    variant={"contained"}
+                    onClick={() => {
+                        window.location = "/signup";
+                    }}
+                >
+                    Sign up
+                </Button>
+            </div>
+            <div style={{marginRight: "10px"}}>
+                <Button variant={"contained"} onClick={() => {
+                    window.location = "/signin"
+                }}>Sign in</Button>
+            </div>
+            <div style={{marginRight: "10px"}}>
+                <Button variant={"contained"} onClick={() => {
+                    window.location = "/addcourses"
+                }}>Add Course</Button>
+            </div>
         </div>
-        <div>
-          <Button variant={"contained"} onClick={()=>{
-              window.location="/signin"
-          }}>Sign in</Button>
-        </div>
-      </div>
     </div>
   );
 }
