@@ -46,8 +46,8 @@ function Signup() {
                                     username,
                                     password
                                 }),
-                                headers:{
-                                    "Content-type":"application/json"
+                                headers: {
+                                    "Content-type": "application/json"
                                 }
                             })
                         }}>
