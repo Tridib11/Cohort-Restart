@@ -42,7 +42,6 @@ function Appbar() {
                     <Button variant={"contained"} onClick={() => {
                         localStorage.setItem("token",null)
                         window.location="/"
-                        navigate("/signup")
                     }}>Logout</Button>
                 </div>
                 <div style={{marginRight: "10px"}}>
