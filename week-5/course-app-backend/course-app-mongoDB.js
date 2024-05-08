@@ -84,6 +84,11 @@ mongoose.connect(
     "mongodb+srv://admin:admin@cluster0.ecv5ewk.mongodb.net/course-app-new"
 );
 
+app.get("/admin/me",authenticateAdminJwt,(req,res)=>{
+    res.json({
+        username:req.admin.username
+    })
+})
 app.post("/admin/signup", async (req, res) => {
     const {username, password} = req.body;
     const admin = await Admin.findOne({username});
