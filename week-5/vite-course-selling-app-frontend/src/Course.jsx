@@ -1,6 +1,6 @@
 import {useEffect, useState} from "react";
 import {useParams} from "react-router-dom";
-import {Card} from "@mui/material";
+import {Card, Typography} from "@mui/material";
 
 function Course(){
     let {courseId}=useParams()
@@ -33,9 +33,20 @@ function Course(){
         </div>
     }
     return <div>
-        <Card>
+        <Card style={{
+            margin: 10,
+            width: 300,
+            minHeight:200,
 
+        }}>
+            <div>
+                <h6>{course._id}</h6>
+                <Typography textAlign={"center"} variant="h6">{course.title}</Typography>
+                <Typography textAlign={"center"} variant="subtitle1">{course.description}</Typography>
+                <img src={course.imageLink} style={{width:300,maxHeight:300}}/>
+            </div>
         </Card>
+        );
     </div>
 
 }
