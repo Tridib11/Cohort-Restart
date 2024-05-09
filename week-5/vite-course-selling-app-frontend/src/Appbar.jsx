@@ -40,14 +40,24 @@ function Appbar() {
                 </div>
                 <div style={{marginRight: "10px"}}>
                     <Button variant={"contained"} onClick={() => {
-                        localStorage.setItem("token",null)
-                        window.location="/"
+                        localStorage.setItem("token", null)
+                        window.location = "/"
                     }}>Logout</Button>
                 </div>
                 <div style={{marginRight: "10px"}}>
                     <Button variant={"contained"} onClick={() => {
-                        navigate("/addcourses")
+                        navigate("/admin/addcourses")
                     }}>Add Course</Button>
+                </div>
+                <div style={{marginRight: "10px"}}>
+                    <Button variant={"contained"} onClick={() => {
+                        navigate("/courses")
+                    }}>All Courses</Button>
+                </div>
+                <div style={{marginRight: "10px"}}>
+                    <Button variant={"contained"} onClick={() => {
+                        navigate("/admin/editcourses/")
+                    }}>Edit Course</Button>
                 </div>
             </div>
         </div>
