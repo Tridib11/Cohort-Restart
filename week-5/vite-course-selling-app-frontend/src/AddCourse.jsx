@@ -44,14 +44,12 @@ function AddCourse() {
                     <div style={{display: "flex", justifyContent: "center"}}>
                         <Button size={"large"} variant="contained" onClick={() => {
                             function callback2(data) {
-                                localStorage.setItem("token", data.token)
+                                alert("Course Added")
                                 // console.log(data)
                             }
-
                             function callback1(res) {
                                 res.json().then(callback2)
                             }
-
                             fetch("http://localhost:3000/admin/courses", {
                                 method: "POST",
                                 body: JSON.stringify({
