@@ -6,6 +6,7 @@ import Button from "@mui/material/Button";
 function AddCourse() {
     const [title, setTitle] = useState("")
     const [description, setDescription] = useState("")
+    const [image,setImage]=useState("")
     return (
         <div style={{
             display: "flex",
@@ -41,6 +42,14 @@ function AddCourse() {
                     />
                     <br/>
                     <br/>
+                    <TextField
+                        onChange={(e) => {
+                            setImage(e.target.value)
+                        }}
+                        fullWidth
+                        label="Image link"
+                        variant="outlined"
+                    />
                     <div style={{display: "flex", justifyContent: "center"}}>
                         <Button size={"large"} variant="contained" onClick={() => {
                             function callback2(data) {
@@ -55,7 +64,7 @@ function AddCourse() {
                                 body: JSON.stringify({
                                     title: title,
                                     description: description,
-                                    imageLink: "",
+                                    imageLink: image,
                                     published: true
 
                                 }),
